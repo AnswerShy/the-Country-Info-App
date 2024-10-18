@@ -1,0 +1,22 @@
+.ContryInfoHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ContryInfoHeader-name, .CountryBorderName {
+    font-size: 50px;
+    color: white;
+}
+.ContryInfoHeader-flag {
+    height: 50px;
+}
+.CountriesBorder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.CountriesBorder > span, p {
+    font-size: 50px;
+    color: white;
+}
