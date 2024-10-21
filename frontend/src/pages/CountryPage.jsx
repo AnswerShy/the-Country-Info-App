@@ -32,7 +32,7 @@ export default function CountryPage() {
                 <CountryPage_Header name={country} flag={countryInfo.flag} />
                 <CountryPage_BorderCountries name={country} borderlist={countryInfo.borders} />
                 {console.log(countryInfo)}
-                <CountryPage_Population data={countryInfo.population}/>
+                {Array.isArray(countryInfo.population) ? (<CountryPage_Population data={countryInfo.population}/>) : (<span className="ContryInfoHeader">{countryInfo.population}</span>)}
             </>) : (<p>Loading...</p> )}
         </>
     );

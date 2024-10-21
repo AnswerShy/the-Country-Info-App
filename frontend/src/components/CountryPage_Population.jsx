@@ -12,8 +12,6 @@ export default function CountryPage_Population({ data }) {
         const xValues = data.map(item => item.year);
         const yValues = data.map(item => item.value);
 
-        console.log(xValues)
-
         const existingChart = Chart.getChart("myChart");
 
         if (existingChart) {
@@ -25,30 +23,20 @@ export default function CountryPage_Population({ data }) {
             data: {
                 labels: xValues,
                 datasets: [{
+                    label: "population",
                     fill: false,
                     lineTension: 0,
-                    backgroundColor: "rgba(0,0,255,1.0)",
-                    borderColor: "rgba(0,0,255,0.1)",
+                    tension: 0.1,
+                    borderColor: 'rgb(75, 192, 192)',
                     data: yValues
                 }]
             },
-            options: {
-                legend: { display: false },
-                scales: {
-                    y: {
-                        min: Math.min(yValues),
-                        max: Math.max(yValues)
-                    }
-                }
-            },
-            height: 250,
-            width: 250
         });
     }, [data]);
 
     return (
         <>
-            <canvas id="myChart" style={{ width: "100%", maxWidth: "700px" }}></canvas>
+            <canvas id="myChart" style={{ width: "100%", maxHeight: "500px", maxWidth: "75%", margin: "0 auto" }}></canvas>
         </>
     );
 }

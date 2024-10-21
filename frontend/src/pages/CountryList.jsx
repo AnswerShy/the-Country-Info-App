@@ -14,24 +14,26 @@ export default function CountryList() {
                 return response.json()
             })
             .then(data => {
-                setCountryList(data)
+                setCountryList(data.data)
             })
             .catch(error => {
                 throw new Error(error)
             })
     }, [])
 
-    var list;
+    const [list, setList] = useState(null);
 
-    if(!countryListInfo) {
-        console.log("sad")
-    }
-    else {
-        list = countryListInfo.map((element, index) => (
-            <CountryWidget key={index} name={element.name} code={element.countryCode}></CountryWidget>
-        ))
-    }
-
+    useEffect(() => {
+        if(!Array.isArray(countryListInfo)) {
+            console.log("sad")
+        }
+        else {
+            console.log(countryListInfo)
+            setList(countryListInfo.map((element, index) => (
+                <CountryWidget key={index} name={element.name} code={element.countryCode} flag={element.flag}></CountryWidget>
+            )))
+        }
+    }, [countryListInfo])
 
 
     return (

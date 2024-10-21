@@ -1,9 +1,9 @@
 const getCounrtyInfo = async (req, res) => {
     const country = req.query.country
     const code = req.query.code
-    console.log(country, code)
 
-    res.json({"borders": await bordersFind(code), "population": await populationFind(country), "flag": await flagFind(country)})
+    const answer = {"borders": await bordersFind(code), "population": await populationFind(country), "flag": await flagFind(country)}
+    res.json(answer)
 }
 
 export default getCounrtyInfo
@@ -44,13 +44,12 @@ const populationFind = (country) => fetch(`https://countriesnow.space/api/v0.1/c
         if(data.data.populationCounts) {
             return data.data.populationCounts
         }
-        else {
-            return "not found"
-        }
-        
     })
     .catch(error => {
-        return new Error(error)
+        if(country === "Russia") {
+            return `Any gnidas was not found`
+        }
+        return `Any info about this country ${error}`
     })
 
 const flagFind = (country) => fetch("https://countriesnow.space/api/v0.1/countries/flag/images", {
@@ -62,19 +61,15 @@ const flagFind = (country) => fetch("https://countriesnow.space/api/v0.1/countri
     })
     .then(response => {
         if (!response.ok) {
-            return new Error(`HTTP error! status: ${response.status}`);
+            return new Error(response.status);
         }
         return response.json();
     })
     .then(data => {
         if(data.data.flag) {
             return data.data.flag
-        }
-        else {
-            return "not found"
-        }
-        
+        } 
     })
     .catch(error => {
-        return new Error(error)
+        return "https://upload.wikimedia.org/wikipedia/commons/3/3a/Unknown.svg"
     })

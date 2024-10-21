@@ -1,7 +1,8 @@
 .ListOfCountry {
     display: flex;
-    width: 100%;
+    width: 58%;
     flex-wrap: wrap;
     justify-content: space-around;
+    margin: 0 auto;
 }
 

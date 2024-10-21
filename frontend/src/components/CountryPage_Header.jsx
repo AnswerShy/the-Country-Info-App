@@ -1,4 +1,3 @@
-
 export default function CountryPage_Header({name, flag}) {
     return (
         <span className="ContryInfoHeader">
